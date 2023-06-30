@@ -20,7 +20,7 @@ This package use clustering algorithms to find aliens in BCDI data with minimal 
 ## Get started
 - clone the repository
 
-    `git clone https://gitlab.esrf.fr/bellec/alien_clustering_bcdi.git`
+    `git clone https://github.com/ewbellec/alienclustering.git`
 
 - open the jupyter notebook Alien_removal_notebook.ipynb
 - follow the instructions
