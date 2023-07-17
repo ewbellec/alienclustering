@@ -25,14 +25,9 @@ This package use clustering algorithms to find aliens in BCDI data with minimal 
 - open the jupyter notebook Alien_removal_notebook.ipynb
 - follow the instructions
 
-## Illustrations
-
-![](illustrations/alien_masking_illustration.png)
-![](illustrations/scatter3d_colors.gif)
-
-
-
-
-
+## Video tutorial
 https://github.com/ewbellec/alienclustering/assets/45454083/5b72897b-35a2-4864-aa8f-d9c27bdf527e
 
+## Illustrations
+![alien_masking_illustration](https://github.com/ewbellec/alienclustering/assets/45454083/933741c2-93a2-4b40-9f39-db454f1942df)
+![scatter3d_colors](https://github.com/ewbellec/alienclustering/assets/45454083/195f84e6-a6eb-46ca-b8bd-4f1085e3445b)
