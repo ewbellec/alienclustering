@@ -30,4 +30,6 @@ This package use clustering algorithms to find aliens in BCDI data with minimal 
 ![](illustrations/alien_masking_illustration.png)
 ![](illustrations/scatter3d_colors.gif)
 
+![](illustrations/alien_clustering_tutorial.mp4)
+
 
