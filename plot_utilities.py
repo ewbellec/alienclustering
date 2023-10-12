@@ -81,9 +81,7 @@ def plot_3D_slice(data,
 ########################                  Plotly functions for a 3D scatter plot of the clusters                   ########################
 ###########################################################################################################################################
 
-from matplotlib import cm
-from matplotlib.colors import Normalize, to_hex
-import plotly.express as px
+
 
 def get_colors(arr, cmap='viridis'):
     '''
@@ -120,6 +118,10 @@ def plotly_scatter3D_clusters(pixels, pixels_labels,
     :Nb_pixels_partial: number of pixels used in the plot. We don't use all of them for rapidity issues.
     :marker_size: size of the scattered points
     '''
+    
+    from matplotlib import cm
+    from matplotlib.colors import Normalize, to_hex
+    import plotly.express as px
     
     if Nb_pixels_partial is not None:
         if len(pixels)<Nb_pixels_partial:
