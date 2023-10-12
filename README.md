@@ -16,6 +16,7 @@ This package use clustering algorithms to find aliens in BCDI data with minimal 
 - **alien_removal_3D_utilities.py** : All functions used for the alien mask creation
 - **Alien_removal_notebook.ipynb** : jupyter notebook with a step-by-step procedure to make the alien mask
 - **example_data** : folder with BCDi data as a tutorial
+- **requirements.txt** : file containing required python module versions (ipywidgets CheckBox can be broken in recent versions)
 
 ## Get started
 - clone the repository
