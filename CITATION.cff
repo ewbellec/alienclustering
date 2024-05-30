@@ -7,6 +7,6 @@ authors:
 title: "Alien masking"
 version: 1.0
 identifiers:
-  - type: http
+  - type: doi
     value: https://github.com/ewbellec/alienclustering.git
 date-released: 2024
