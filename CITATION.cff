@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Bellec
+    given-names: Ewen
+    orcid: https://orcid.org/0000-0001-6863-0293
+title: "Alien masking"
+version: 1.0
+identifiers:
+  - type: http
+    value: https://github.com/ewbellec/alienclustering.git
+date-released: 2024
