@@ -4,9 +4,7 @@ authors:
   - family-names: Bellec
     given-names: Ewen
     orcid: https://orcid.org/0000-0001-6863-0293
-title: "Alien masking"
+title: "alienclustering"
 version: 1.0
-identifiers:
-  - type: doi
-    value: https://github.com/ewbellec/alienclustering.git
+url: "https://github.com/ewbellec/alienclustering.git"
 date-released: 2024
