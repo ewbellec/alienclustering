@@ -402,66 +402,60 @@ def plot_2d_projection_cluster(data, pixels, pixels_labels, label,
     return
 
 
-def plot_clusters_select_2d_projections(data, pixels, pixels_labels, 
-                                        sorting='size'):
-    '''
-    Plot clusters for user selection
-    
-    Parameters
-    ----------
-    :data: 3D BCDI array
-    :pixels: clustered pixels
-    :pixels_labels: array of integer corresponding to the cluster label of each pixel
-    :sorting: sorting algorithm to plot the most important clusters first.
-              Available algorithm are 'size', 'max', 'asym', 'None'
-              'size' : sort cluster by number of pixels in it
-              'max' : sort using the maximum pixel intensity in each cluster
-              'asym' : sort using average asymmetry of each cluster
-              'None' : no sorting
-    
-    Returns
-    ----------
-    :labels: a list of labels in pixels_labels
-    :check_list: boolean array containing True for each label selected by the user
-    
-    '''
-                
-    if sorting=='asym' :
-#         data_log = log_scale_matteotype_renormalization(data)
-#         asym = compute_asymmetry_matrix(data_log)
+from io import BytesIO
+def plot_clusters_select_2d_projections(data, pixels, pixels_labels, sorting='size'):
+    """
+    Plot clusters for user selection using ipywidgets 8.x
+    """
+
+    # --- Determine cluster order ---
+    if sorting == 'asym':
         asym = compute_asymmetry_matrix(data)
         labels, labels_asym = compute_clusters_asymmetry(asym, pixels, pixels_labels)
         labels = labels[np.argsort(labels_asym)[::-1]]
-    elif sorting=='max':
+
+    elif sorting == 'max':
         labels, labels_max_intensity = compute_clusters_max(data, pixels, pixels_labels)
         labels = labels[np.argsort(labels_max_intensity)[::-1]]
-    elif sorting=='size':
+
+    elif sorting == 'size':
         cluster_size, labels = get_clusters_size(pixels_labels)
         labels = labels[np.argsort(cluster_size)[::-1]]
-    elif sorting=='None':
-        print('no sorting is used')
+
+    elif sorting == 'None':
+        print('No sorting is used')
         labels = np.unique(pixels_labels)
+
     else:
-        raise ValueError('sorting possible values are \'size\', \'max\', \'asym\' and \'None\' ')
-    
-    vbox = widgets.VBox()
+        raise ValueError("sorting possible values are 'size', 'max', 'asym', 'None'")
+
+    # --- Build widgets (NO VBoxModel, ipywidgets 8 compatible) ---
     check_list = []
-    fig, ax = plt.subplots(1,3, figsize=(12,4))
+    children = []
+
     for label in labels:
+        # Create matplotlib figure
+        fig, ax = plt.subplots(1, 3, figsize=(12, 4))
+        plot_2d_projection_cluster(
+            data, pixels, pixels_labels, label, fig=fig, ax=ax
+        )
 
-        plot_2d_projection_cluster(data, pixels, pixels_labels, label, fig=fig,ax=ax)
-        fig.savefig('temp.jpg')
+        # Save figure to in-memory buffer
+        buf = BytesIO()
+        fig.savefig(buf, format="png", bbox_inches="tight")
+        buf.seek(0)
+        plt.close(fig)
 
-        file = open('temp.jpg', "rb")
-        image = file.read()
-        img = widgets.Image(value=image)
+        # Widgets
+        img_widget = widgets.Image(value=buf.read(), format="png")
+        check = widgets.Checkbox(description=f"Select cluster {label}")
 
-        check = widgets.Checkbox(description='select or not')
         check_list.append(check)
-        vbox.children = tuple(list(vbox.children) + [img,check])
+        children.append(widgets.VBox([img_widget, check]))
+
+    # Single VBox instantiation (IMPORTANT for ipywidgets 8)
+    vbox = widgets.VBox(children=children)
     display(vbox)
-    fig.clf()
-    os.remove('temp.jpg')
 
     return check_list, labels
 
